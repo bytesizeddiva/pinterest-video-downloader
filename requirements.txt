@@ -1,0 +1,7 @@
+# Pinterest Video Downloader dependencies
+# Created by bytesizeddiva
+
+requests
+beautifulsoup4
+tqdm
+flask
