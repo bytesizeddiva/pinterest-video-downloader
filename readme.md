@@ -27,7 +27,7 @@ A modern web application for downloading Pinterest videos, featuring a clean int
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/PinterestVideoDownloader.git
+   git clone https://github.com/bytesizeddiva/PinterestVideoDownloader.git
    cd PinterestVideoDownloader
    ```
 
