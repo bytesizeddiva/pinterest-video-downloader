@@ -60,6 +60,84 @@
             --error-text: #FF0000;
         }
 
+        [data-theme="neon"] {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #ff00ff;
+            --text-secondary: #00ffff;
+            --border-color: #ff00ff;
+            --accent-color: #00ffff;
+            --success-bg: #002033;
+            --success-text: #00ffff;
+            --error-bg: #330033;
+            --error-text: #ff00ff;
+        }
+
+        [data-theme="cyber"] {
+            --bg-primary: #001a1a;
+            --bg-secondary: #002b2b;
+            --text-primary: #00ffff;
+            --text-secondary: #00cccc;
+            --border-color: #00ffff;
+            --accent-color: #00ffff;
+            --success-bg: #003333;
+            --success-text: #00ffff;
+            --error-bg: #330000;
+            --error-text: #ff3333;
+        }
+
+        [data-theme="catppuccin"] {
+            --bg-primary: #1e1e2e;
+            --bg-secondary: #302d41;
+            --text-primary: #cdd6f4;
+            --text-secondary: #bac2de;
+            --border-color: #f5c2e7;
+            --accent-color: #cba6f7;
+            --success-bg: #1e2030;
+            --success-text: #a6e3a1;
+            --error-bg: #2d1b1e;
+            --error-text: #f38ba8;
+        }
+
+        [data-theme="synthwave"] {
+            --bg-primary: #2b213a;
+            --bg-secondary: #241b2f;
+            --text-primary: #ff71ce;
+            --text-secondary: #b967ff;
+            --border-color: #01cdfe;
+            --accent-color: #ff71ce;
+            --success-bg: #1b2f1b;
+            --success-text: #05ffa1;
+            --error-bg: #2f1b1b;
+            --error-text: #ff2b2b;
+        }
+
+        [data-theme="nordic"] {
+            --bg-primary: #2e3440;
+            --bg-secondary: #3b4252;
+            --text-primary: #eceff4;
+            --text-secondary: #d8dee9;
+            --border-color: #88c0d0;
+            --accent-color: #81a1c1;
+            --success-bg: #3b4252;
+            --success-text: #a3be8c;
+            --error-bg: #3b4252;
+            --error-text: #bf616a;
+        }
+
+        [data-theme="dracula"] {
+            --bg-primary: #282a36;
+            --bg-secondary: #44475a;
+            --text-primary: #f8f8f2;
+            --text-secondary: #6272a4;
+            --border-color: #bd93f9;
+            --accent-color: #ff79c6;
+            --success-bg: #2d3436;
+            --success-text: #50fa7b;
+            --error-bg: #342d35;
+            --error-text: #ff5555;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -377,6 +455,60 @@
         [data-theme="matrix"] .cancel-btn:hover {
             text-shadow: 0 0 8px var(--error-text);
         }
+
+        /* Add synthwave specific glow effects */
+        [data-theme="synthwave"] .download-btn {
+            box-shadow: 0 0 10px var(--accent-color);
+            text-shadow: 0 0 5px var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="synthwave"] .download-btn:hover {
+            box-shadow: 0 0 20px var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        [data-theme="synthwave"] h1 {
+            text-shadow: 0 0 10px var(--text-primary);
+        }
+
+        /* Add nordic frost effect */
+        [data-theme="nordic"] .download-btn {
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(136, 192, 208, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="nordic"] .download-btn:hover {
+            background: rgba(129, 161, 193, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        [data-theme="nordic"] input[type="url"] {
+            border: 1px solid rgba(136, 192, 208, 0.2);
+            backdrop-filter: blur(2px);
+        }
+
+        /* Add dracula specific effects */
+        [data-theme="dracula"] .download-btn {
+            background: linear-gradient(135deg, var(--accent-color), var(--border-color));
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dracula"] .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(189, 147, 249, 0.3);
+        }
+
+        [data-theme="dracula"] input[type="url"] {
+            border-color: var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dracula"] input[type="url"]:focus {
+            box-shadow: 0 0 0 2px rgba(189, 147, 249, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -385,6 +517,12 @@
             <option value="light">Light Mode</option>
             <option value="tokyo">Tokyo Mode</option>
             <option value="matrix">Matrix Mode</option>
+            <option value="neon">Neon Mode</option>
+            <option value="cyber">Cyber Mode</option>
+            <option value="catppuccin">Catppuccin Mode</option>
+            <option value="synthwave">Synthwave Mode</option>
+            <option value="nordic">Nordic Mode</option>
+            <option value="dracula">Dracula Mode</option>
         </select>
     </div>
     
