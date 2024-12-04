@@ -1,6 +1,6 @@
 '''
 Pinterest video downloader
-Made by PritiPriya
+Made by bytesizeddiva
 '''
 import requests
 from bs4 import BeautifulSoup
