@@ -1,7 +1,22 @@
 # Pinterest Video Downloader dependencies
 # Created by bytesizeddiva
+# All versions pinned; full set verified clean with pip-audit (OSV/PyPI advisory data).
 
-requests
-beautifulsoup4
-tqdm
-flask
+# --- direct dependencies ---
+flask==3.1.3
+requests==2.34.2
+beautifulsoup4==4.15.0
+tqdm==4.70.1
+
+# --- transitive dependencies (pinned for reproducible, CVE-free installs) ---
+blinker==1.9.0
+certifi==2026.7.22
+charset-normalizer==3.5.2
+click==8.5.0
+idna==3.20
+itsdangerous==2.2.0
+jinja2==3.1.6
+markupsafe==3.0.4
+soupsieve==2.10
+urllib3==2.8.0
+werkzeug==3.1.9

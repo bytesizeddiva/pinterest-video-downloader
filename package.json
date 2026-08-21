@@ -1,0 +1,23 @@
+{
+  "name": "pinterest-video-downloader",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pinterest video downloader with a Flask web UI and npm-powered dev tooling",
+  "scripts": {
+    "postinstall": "node scripts/py.mjs setup",
+    "setup": "node scripts/py.mjs setup",
+    "dev": "node scripts/py.mjs app --debug",
+    "start": "node scripts/py.mjs app",
+    "cli": "node scripts/py.mjs cli",
+    "audit": "node scripts/py.mjs audit"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bytesizeddiva/pinterest-video-downloader.git"
+  },
+  "author": "bytesizeddiva",
+  "license": "MIT"
+}

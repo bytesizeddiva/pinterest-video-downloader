@@ -1,0 +1,14 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Downloaded videos
+downloads/
+
+# Node
+node_modules/
+
+# Environment / editor
+.env
+.DS_Store

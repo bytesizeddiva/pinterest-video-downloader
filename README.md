@@ -2,15 +2,13 @@
 
 A modern web application for downloading Pinterest videos, featuring a clean interface and multiple theme options. Created and maintained by bytesizeddiva.
 
-![Themes Preview](themes.png)
-
 ## Features
 
 - 🎨 Multiple themes (Light, Tokyo, Matrix)
+- 📥 Browser-native downloads — the file lands wherever *your* browser is configured to save it
 - 🌐 Web-based interface
-- ⚡ Real-time download progress
 - 🎯 Support for both Pinterest and pin.it URLs
-- 🔄 Download cancellation support
+- 🛑 One-click cancel while the video is being prepared
 - 📱 Responsive design
 
 ## Technology Stack
@@ -23,6 +21,11 @@ A modern web application for downloading Pinterest videos, featuring a clean int
   - BeautifulSoup4
   - Threading support for concurrent downloads
 
+## Prerequisites
+
+- **Node.js** 18+ (used to orchestrate setup and dev commands)
+- **Python** 3.10+ (the app itself is Flask/Python)
+
 ## Installation
 
 1. Clone the repository:
@@ -31,16 +34,24 @@ A modern web application for downloading Pinterest videos, featuring a clean int
    cd PinterestVideoDownloader
    ```
 
-2. Install dependencies:
+2. Install everything (creates a Python virtualenv and installs pinned dependencies automatically):
    ```bash
-   pip install -r requirements.txt
+   npm install
    ```
 
 ## Usage
 
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the server with Flask debug/reloader mode |
+| `npm start` | Start the server without debug mode |
+| `npm run cli` | Run the classic CLI downloader |
+| `npm run setup` | (Re)create the `.venv` from `requirements.txt` |
+| `npm run audit` | Run `pip-audit` against installed packages (CVE check) |
+
 1. Start the server:
    ```bash
-   python app.py
+   npm run dev
    ```
 
 2. Open your browser and navigate to:
@@ -49,6 +60,21 @@ A modern web application for downloading Pinterest videos, featuring a clean int
    ```
 
 3. Paste a Pinterest video URL and click Download
+
+Configuration via environment variables: `PORT` (default `5000`), `HOST` (default `127.0.0.1`), `FLASK_DEBUG=1` to enable debug mode.
+
+### Running without npm (pure Python)
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+```
+
+## Dependencies & security
+
+All Python dependencies are pinned to exact versions in `requirements.txt` (including transitive ones) and verified clean against known CVEs with `npm run audit` (`pip-audit` + OSV/PyPI advisory data).
 
 ## Supported URLs
 
@@ -92,19 +118,20 @@ To change themes:
 3. The change applies instantly with no page reload
 
 ### Download Management
-- Real-time progress tracking
-- Ability to cancel ongoing downloads
-- Chunked downloading for better performance
-- Automatic cleanup of cancelled downloads
+- Browser-native downloads with real progress in the browser's downloads bar
+- Respects your browser's save settings (e.g. "Ask where to save each file")
+- Nothing is written to the server's disk — video bytes are streamed straight through
+- Short-lived (10-minute) prepared links with automatic cleanup
+- One-click cancel while the video is being prepared
 
 ## Technical Details
 
-The application uses a threaded download system to handle concurrent requests efficiently. Downloads are processed in the background, allowing for proper cancellation and progress tracking.
+The app prepares a download in one step (validate → resolve short links → find every MP4 rendition Pinterest offers → probe until one actually streams), then hands a short-lived token to the browser. The browser pulls the file through the streaming endpoint, so **no video is ever stored on the server** and the browser's own downloader handles progress and save location.
 
 ### Architecture
 - Frontend: Modern HTML5 with vanilla JavaScript
-- Backend: Flask with threading support
-- File handling: Chunked downloads with cancellation support
+- Backend: Flask with a streaming proxy endpoint (`/file/<token>`)
+- File handling: streamed end-to-end with `Content-Disposition: attachment` (chunked, no disk writes)
 
 ## Limitations
 
