@@ -13,30 +13,38 @@
         :root,
         [data-theme="light"] {
             --bg-primary: #ffffff;
-            --bg-secondary: #f6f6f6;
-            --text-primary: #111111;
-            --text-secondary: #767676;
-            --border-color: #e2e2e2;
-            --accent-color: #e60023;
+            --bg-secondary: #f6f6f3;      /* Fog - light surface */
+            --surface: #e5e5e0;            /* Sand gray - buttons/surfaces */
+            --surface-strong: #e0e0d9;    /* Warm light - circular buttons */
+            --text-primary: #211922;      /* Plum black */
+            --text-secondary: #62625b;    /* Olive gray */
+            --border-color: #e0e0d9;      /* Warm light */
+            --border-strong: #91918c;     /* Warm silver - input borders */
+            --accent-color: #e60023;      /* Pinterest red */
             --accent-text: #e60023;
-            --success-bg: #f0fdf4;
-            --success-text: #16a34a;
-            --error-bg: #fdf2f2;
-            --error-text: #cc0017;
+            --focus-color: #435ee5;       /* Focus blue */
+            --success-bg: #f1f6f2;
+            --success-text: #103c25;      /* Green 700 */
+            --error-bg: #fdf3f3;
+            --error-text: #b3261e;
         }
 
         [data-theme="dark"] {
             --bg-primary: #111111;
-            --bg-secondary: #1e1e1e;
+            --bg-secondary: #1c1c1a;
+            --surface: #262623;
+            --surface-strong: #33332e;
             --text-primary: #efefef;
-            --text-secondary: #9e9e9e;
-            --border-color: #333333;
+            --text-secondary: #adaba6;
+            --border-color: #33332e;
+            --border-strong: #4d4d47;
             --accent-color: #e60023;
-            --accent-text: #ff5069;
-            --success-bg: #0f2417;
-            --success-text: #4ade80;
-            --error-bg: #2b1216;
-            --error-text: #ff6b6b;
+            --accent-text: #f4536a;
+            --focus-color: #7b91ff;
+            --success-bg: #12211a;
+            --success-text: #6fd08c;
+            --error-bg: #241416;
+            --error-text: #ff8a8a;
         }
 
         * {
@@ -56,14 +64,11 @@
             flex-direction: column;
             color: var(--text-primary);
             background-color: var(--bg-primary);
-            background-image:
-                radial-gradient(ellipse 90% 60% at 50% -15%, color-mix(in srgb, var(--accent-color) 14%, transparent), transparent 70%),
-                radial-gradient(ellipse 50% 40% at 100% 100%, color-mix(in srgb, var(--border-color) 10%, transparent), transparent 70%);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         ::selection {
-            background: color-mix(in srgb, var(--accent-color) 35%, transparent);
+            background: color-mix(in srgb, var(--text-primary) 18%, transparent);
         }
 
         /* ---------- Header ---------- */
@@ -78,13 +83,9 @@
             justify-content: space-between;
             gap: 16px;
             padding: 9px 9px 9px 20px;
-            background: color-mix(in srgb, var(--bg-primary) 72%, transparent);
-            backdrop-filter: blur(24px) saturate(160%);
-            -webkit-backdrop-filter: blur(24px) saturate(160%);
-            border: 1px solid color-mix(in srgb, var(--border-color) 35%, transparent);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
             border-radius: 999px;
-            box-shadow: 0 16px 40px -24px rgba(0, 0, 0, 0.55),
-                inset 0 1px 0 color-mix(in srgb, var(--text-primary) 8%, transparent);
         }
 
         .brand {
@@ -100,10 +101,9 @@
             place-items: center;
             width: 34px;
             height: 34px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--accent-color), color-mix(in srgb, var(--accent-color) 65%, #8a0014));
+            border-radius: 50%;
+            background: var(--accent-color);
             color: #fff;
-            box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--accent-color) 60%, transparent);
         }
 
         .brand-mark svg {
@@ -131,12 +131,11 @@
             width: 44px;
             height: 44px;
             border-radius: 999px;
-            background: color-mix(in srgb, var(--bg-secondary) 90%, transparent);
-            border: 1px solid color-mix(in srgb, var(--border-color) 35%, transparent);
+            background: var(--surface);
+            border: 1px solid transparent;
             color: var(--text-primary);
             cursor: pointer;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease,
-                color 0.2s ease, transform 0.15s ease;
+            transition: color 0.2s ease;
         }
 
         .theme-toggle svg {
@@ -145,17 +144,12 @@
         }
 
         .theme-toggle:hover {
-            border-color: color-mix(in srgb, var(--accent-color) 60%, transparent);
             color: var(--accent-text);
-        }
-
-        .theme-toggle:active {
-            transform: scale(0.94);
         }
 
         .theme-toggle:focus-visible {
             outline: none;
-            box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 25%, transparent);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus-color) 25%, transparent);
         }
 
         /* Light mode shows the moon (switch to dark); dark mode shows the sun */
@@ -181,13 +175,9 @@
             flex-direction: column;
             gap: 18px;
             padding: clamp(22px, 4vw, 36px);
-            background: color-mix(in srgb, var(--bg-secondary) 62%, transparent);
-            backdrop-filter: blur(30px) saturate(150%);
-            -webkit-backdrop-filter: blur(30px) saturate(150%);
-            border: 1px solid color-mix(in srgb, var(--border-color) 25%, transparent);
-            border-radius: 32px;
-            box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.55),
-                inset 0 1px 0 color-mix(in srgb, var(--text-primary) 8%, transparent);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
             animation: fadeUp 0.5s 0.08s ease both;
         }
 
@@ -211,8 +201,8 @@
             font-weight: 500;
             letter-spacing: 0.02em;
             color: var(--accent-text);
-            background: color-mix(in srgb, var(--accent-color) 12%, transparent);
-            border: 1px solid color-mix(in srgb, var(--accent-color) 30%, transparent);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             border-radius: 999px;
         }
 
@@ -223,13 +213,10 @@
 
         h1 {
             font-size: clamp(30px, 5vw, 44px);
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: -0.03em;
             line-height: 1.1;
-            background: linear-gradient(120deg, var(--text-primary) 30%, var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-primary);
         }
 
         .hero-sub {
@@ -274,8 +261,8 @@
             width: 34px;
             height: 34px;
             border-radius: 999px;
-            background: color-mix(in srgb, var(--accent-color) 14%, transparent);
-            color: var(--accent-text);
+            background: var(--surface-strong);
+            color: var(--text-primary);
             pointer-events: none;
         }
 
@@ -289,26 +276,23 @@
             width: 100%;
             height: 56px;
             padding: 0 116px 0 52px;
-            border: 1px solid color-mix(in srgb, var(--border-color) 45%, transparent);
+            border: 1px solid var(--border-strong);
             border-radius: 999px;
-            background: color-mix(in srgb, var(--bg-primary) 60%, transparent);
+            background: var(--bg-primary);
             color: var(--text-primary);
             font-size: 15px;
             font-family: inherit;
-            box-shadow: inset 0 1px 3px color-mix(in srgb, var(--text-primary) 8%, transparent);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         input[type="url"]::placeholder {
-            color: color-mix(in srgb, var(--text-secondary) 75%, transparent);
+            color: color-mix(in srgb, var(--text-secondary) 70%, transparent);
         }
 
         input[type="url"]:focus {
             outline: none;
-            border-color: var(--accent-color);
-            background: var(--bg-primary);
-            box-shadow: inset 0 1px 3px color-mix(in srgb, var(--text-primary) 8%, transparent),
-                0 0 0 4px color-mix(in srgb, var(--accent-color) 20%, transparent);
+            border-color: var(--focus-color);
+            box-shadow: 0 0 0 4px color-mix(in srgb, var(--focus-color) 22%, transparent);
         }
 
         .paste-btn {
@@ -361,9 +345,7 @@
             letter-spacing: 0.01em;
             cursor: pointer;
             white-space: nowrap;
-            transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
-            box-shadow: inset 0 1px 0 color-mix(in srgb, var(--bg-primary) 45%, transparent),
-                0 14px 30px -12px color-mix(in srgb, var(--accent-color) 75%, transparent);
+            transition: background-color 0.18s ease;
         }
 
         .download-btn svg {
@@ -372,27 +354,17 @@
         }
 
         .download-btn:hover {
-            transform: translateY(-1px);
             background: color-mix(in srgb, var(--accent-color) 88%, #8a0014);
-            box-shadow: inset 0 1px 0 color-mix(in srgb, var(--bg-primary) 45%, transparent),
-                0 16px 30px -12px color-mix(in srgb, var(--accent-color) 75%, transparent);
-        }
-
-        .download-btn:active {
-            transform: translateY(0);
         }
 
         .download-btn:disabled {
-            background: color-mix(in srgb, var(--text-secondary) 30%, var(--bg-secondary));
-            color: var(--text-secondary);
-            box-shadow: none;
+            background: var(--surface);
+            color: var(--border-strong);
             cursor: not-allowed;
-            transform: none;
         }
 
         .download-btn:disabled:hover {
-            background: color-mix(in srgb, var(--text-secondary) 30%, var(--bg-secondary));
-            transform: none;
+            background: var(--surface);
         }
 
         .meta-row {
@@ -409,8 +381,8 @@
             padding: 6px 12px;
             font-size: 12.5px;
             color: var(--text-secondary);
-            background: color-mix(in srgb, var(--bg-primary) 55%, transparent);
-            border: 1px solid color-mix(in srgb, var(--border-color) 35%, transparent);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             border-radius: 999px;
         }
 
@@ -557,19 +529,14 @@
 
         .step {
             padding: 22px 20px;
-            background: color-mix(in srgb, var(--bg-secondary) 60%, transparent);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid color-mix(in srgb, var(--border-color) 28%, transparent);
-            border-radius: 26px;
-            box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text-primary) 6%, transparent);
-            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            transition: border-color 0.2s ease;
         }
 
         .step:hover {
-            transform: translateY(-3px);
-            border-color: color-mix(in srgb, var(--accent-color) 45%, transparent);
-            box-shadow: 0 16px 30px -20px rgba(0, 0, 0, 0.5);
+            border-color: var(--border-strong);
         }
 
         .step-num {
@@ -583,7 +550,6 @@
             font-weight: 600;
             color: #fff;
             background: var(--accent-color);
-            box-shadow: 0 8px 16px -8px color-mix(in srgb, var(--accent-color) 80%, transparent);
         }
 
         .step h3 {
