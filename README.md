@@ -1,10 +1,10 @@
 # Pinterest Video Downloader
 
-A modern web application for downloading Pinterest videos, featuring a clean interface and multiple theme options. Created and maintained by bytesizeddiva.
+A modern web application for downloading Pinterest videos, featuring a clean Pinterest-branded interface with light and dark mode. Created and maintained by bytesizeddiva.
 
 ## Features
 
-- 🎨 Multiple themes (Light, Tokyo, Matrix)
+- 🌓 Light & dark mode with Pinterest brand colors
 - 📥 Browser-native downloads — the file lands wherever *your* browser is configured to save it
 - 🌐 Web-based interface
 - 🎯 Support for both Pinterest and pin.it URLs
@@ -84,38 +84,23 @@ All Python dependencies are pinned to exact versions in `requirements.txt` (incl
 ## Features in Detail
 
 ### Theme System
-- **Light Mode**: Clean, minimal design
-- **Tokyo Mode**: Dark theme with cyberpunk-inspired colors
-- **Matrix Mode**: Classic matrix theme with green accents
-- **Neon Mode**: Vibrant neon colors with glowing effects
-- **Cyber Mode**: Futuristic cyan theme with sleek design
-- **Catppuccin Mode**: Soothing pastel theme with modern aesthetics
-- **Synthwave Mode**: Retro-futuristic 80s inspired theme with neon pink and purple
-- **Nordic Mode**: Minimalist frost-inspired theme with arctic colors
-- **Dracula Mode**: Rich, vibrant colors on a dark background
+- **Light Mode**: Clean white surfaces with Pinterest red accents
+- **Dark Mode**: Deep charcoal surfaces that stay comfortable in low light
 
 ### Theme Details
 
-#### Recent Additions
-- **Neon**: Electric neon colors with pink and cyan accents
-- **Cyber**: Futuristic design with cyan as primary color
-- **Catppuccin**: Modern pastel theme with soft, eye-friendly colors
-- **Synthwave**: 80s retro aesthetic with glowing effects and gradients
-- **Nordic**: Scandinavian-inspired minimalist design with frost effects
-- **Dracula**: Popular dark theme with vibrant accents and smooth transitions
+Both modes share one design system built from CSS custom properties, so every component stays consistent:
 
-Each theme features:
-- Custom color palettes
-- Unique visual effects
-- Responsive design elements
-- Smooth transitions
-- Hover animations
-- Consistent styling across all components
+- Pinterest brand palette (`#E60023` accent, `#111` text, `#EFEFEF` surfaces)
+- Mode-aware accent tokens keep text legible in both themes
+- Glass surfaces with soft, rounded (pill) controls
+- Smooth transitions and hover animations
+- Fully responsive, with reduced-motion support
 
-To change themes:
-1. Click the theme dropdown in the top-right corner
-2. Select your preferred theme
-3. The change applies instantly with no page reload
+To switch modes:
+1. Click the sun/moon toggle in the header (top-right)
+2. The change applies instantly with no page reload
+3. Your choice is remembered on this device
 
 ### Download Management
 - Browser-native downloads with real progress in the browser's downloads bar
