@@ -89,12 +89,28 @@ All Python dependencies are pinned to exact versions in `requirements.txt` (incl
 
 ### Theme Details
 
-Both modes share one design system built from CSS custom properties, so every component stays consistent:
+Both modes share one design system built from CSS custom properties, so every component stays consistent.
 
-- Pinterest brand palette (`#E60023` accent, `#111` text, `#EFEFEF` surfaces)
-- Mode-aware accent tokens keep text legible in both themes
-- Glass surfaces with soft, rounded (pill) controls
-- Smooth transitions and hover animations
+**Pinterest palette (light mode)**
+
+| Role | Color |
+|---|---|
+| Brand accent (CTAs) | `#e60023` |
+| Background | `#ffffff` |
+| Surface / cards | `#f6f6f3` |
+| Primary text | `#211922` |
+| Secondary text | `#62625b` |
+| Buttons / sand gray | `#e5e5e0` |
+| Borders (inputs) | `#91918c` |
+| Focus ring | `#435ee5` |
+
+Dark mode uses warm near-black surfaces (`#111111` / `#1c1c1a` / `#262623`) with warm grays, keeping the same red accent.
+
+**Design principles**
+- Warm olive/sand neutrals instead of cool steel grays
+- Pinterest red reserved for the primary CTA — bold and singular
+- Flat surfaces: depth comes from color and generous rounding, not shadows
+- Generous radii (pill controls, 24px cards)
 - Fully responsive, with reduced-motion support
 
 To switch modes:
