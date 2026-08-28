@@ -67,14 +67,19 @@
 
         html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
         }
 
         body {
             min-height: 100vh;
+            min-height: 100dvh; /* correct viewport on mobile browsers */
             display: flex;
             flex-direction: column;
             color: var(--text-primary);
             background-color: var(--bg-primary);
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
@@ -85,15 +90,15 @@
         /* ---------- Header ---------- */
         .site-header {
             position: sticky;
-            top: 12px;
+            top: calc(12px + env(safe-area-inset-top));
             z-index: 1000;
             width: min(1060px, calc(100% - 24px));
-            margin: 12px auto 0;
+            margin: calc(12px + env(safe-area-inset-top)) auto 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            padding: 9px 9px 9px 20px;
+            padding: calc(9px + env(safe-area-inset-top)) 9px 9px 20px;
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
             border-radius: 999px;
@@ -103,6 +108,9 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            padding: 5px 8px 5px 0;
+            margin: -5px -8px -5px 0;
+            border-radius: 999px;
             text-decoration: none;
             color: var(--text-primary);
         }
@@ -178,7 +186,8 @@
             width: 100%;
             max-width: 720px;
             margin: 0 auto;
-            padding: clamp(28px, 6vw, 56px) clamp(16px, 4vw, 24px) 48px;
+            padding: clamp(28px, 6vw, 56px) clamp(16px, 4vw, 24px)
+                calc(48px + env(safe-area-inset-bottom));
         }
 
         .download-form {
@@ -286,7 +295,7 @@
         input[type="url"] {
             width: 100%;
             height: 56px;
-            padding: 0 116px 0 52px;
+            padding: 0 120px 0 52px;
             border: 1px solid var(--border-strong);
             border-radius: 999px;
             background: var(--bg-primary);
@@ -308,14 +317,14 @@
 
         .paste-btn {
             position: absolute;
-            right: 9px;
+            right: 7px;
             top: 50%;
             transform: translateY(-50%);
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            height: 38px;
-            padding: 0 15px;
+            height: 42px;
+            padding: 0 16px;
             border-radius: 999px;
             border: 1px solid color-mix(in srgb, var(--border-color) 45%, transparent);
             background: color-mix(in srgb, var(--bg-secondary) 90%, transparent);
@@ -605,7 +614,7 @@
         .footer-brand .brand-mark {
             width: 28px;
             height: 28px;
-            border-radius: 8px;
+            border-radius: 50%;
         }
 
         .footer-brand .brand-mark svg {
@@ -623,6 +632,9 @@
             font-size: 13.5px;
             color: var(--text-secondary);
             text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            min-height: 40px;
             padding: 8px 16px;
             border-radius: 999px;
             border: 1px solid transparent;
@@ -643,7 +655,7 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
-            padding: 14px 0 22px;
+            padding: 14px 0 calc(22px + env(safe-area-inset-bottom));
             border-top: 1px dashed color-mix(in srgb, var(--border-color) 30%, transparent);
             font-size: 12.5px;
             color: var(--text-secondary);
@@ -668,34 +680,145 @@
             }
         }
 
+        /* Touch devices: neutralise sticky :hover states left behind by taps */
+        @media (hover: none) {
+
+            .download-btn:hover,
+            .download-btn:active {
+                background: var(--accent-color);
+            }
+
+            .download-btn:active {
+                background: color-mix(in srgb, var(--accent-color) 80%, #8a0014);
+            }
+
+            .step:hover {
+                border-color: var(--border-color);
+            }
+
+            .paste-btn:hover {
+                color: var(--text-secondary);
+                border-color: color-mix(in srgb, var(--border-color) 45%, transparent);
+                background: color-mix(in srgb, var(--bg-secondary) 90%, transparent);
+            }
+
+            .theme-toggle:hover {
+                color: var(--text-primary);
+            }
+
+            .cancel-btn:hover,
+            .footer-links a:hover {
+                color: var(--text-secondary);
+                background: none;
+                border-color: transparent;
+            }
+
+            #status .reset-btn:hover {
+                color: color-mix(in srgb, currentColor 78%, transparent);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .main-container {
+                padding: clamp(24px, 5vw, 40px) clamp(16px, 4vw, 24px)
+                    calc(40px + env(safe-area-inset-bottom));
+            }
+
+            .steps {
+                gap: 12px;
+            }
+        }
+
         @media (max-width: 720px) {
             .steps {
                 grid-template-columns: 1fr;
+                gap: 12px;
+                margin-top: 28px;
+            }
+
+            .step {
+                padding: 18px;
+                border-radius: 20px;
             }
         }
 
         @media (max-width: 640px) {
             .site-header {
-                padding: 12px 16px;
+                padding: calc(8px + env(safe-area-inset-top)) 8px 8px 16px;
             }
 
             .theme-toggle {
-                width: 40px;
-                height: 40px;
+                width: 44px;
+                height: 44px;
+            }
+
+            .main-container {
+                padding: 20px 14px calc(36px + env(safe-area-inset-bottom));
             }
 
             .download-form {
+                padding: 20px 16px;
                 border-radius: 20px;
+                gap: 16px;
+            }
+
+            .hero {
+                gap: 12px;
+                margin-bottom: 22px;
+            }
+
+            h1 {
+                font-size: clamp(27px, 7.5vw, 34px);
+            }
+
+            .hero-sub {
+                font-size: 14.5px;
             }
 
             input[type="url"] {
+                height: 54px;
+                padding-right: 104px;
                 font-size: 16px;
+                /* 16px stops iOS Safari auto-zooming when the field is focused */
+            }
+
+            .paste-btn {
+                height: 42px;
+            }
+
+            .cancel-btn {
+                min-height: 44px;
+                padding: 10px 22px;
+            }
+
+            .meta-chip svg {
+                width: 12px;
+                height: 12px;
+            }
+
+            .footer-links {
+                justify-content: center;
+                gap: 8px 10px;
+            }
+
+            .footer-links a {
+                padding: 11px 16px;
+            }
+
+            .footer-bottom {
+                gap: 6px;
+                font-size: 12px;
+            }
+
+            /* avoid a dangling separator when the credits wrap */
+            .footer-bottom .dot:last-of-type {
+                display: none;
             }
         }
 
         @media (max-width: 440px) {
-            .brand-name {
-                display: none;
+            .site-header {
+                padding-left: 10px;
             }
 
             .paste-btn .paste-label {
@@ -703,12 +826,75 @@
             }
 
             .paste-btn {
-                padding: 0 10px;
+                width: 44px;
+                height: 44px;
+                padding: 0;
+                justify-content: center;
+            }
+
+            input[type="url"] {
+                padding-right: 68px;
+            }
+
+            .download-form {
+                padding: 18px 14px;
+            }
+
+            .meta-chip {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .main-container {
+                padding: 16px 10px calc(28px + env(safe-area-inset-bottom));
+            }
+
+            .brand-name {
+                font-size: 14px;
+            }
+
+            .download-form {
+                padding: 16px 12px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            .hero-badge {
+                font-size: 11.5px;
+                padding: 6px 12px;
+            }
+        }
+
+        /* Extremely narrow phones: drop the wordmark rather than squeeze it */
+        @media (max-width: 300px) {
+            .brand-name {
+                display: none;
+            }
+        }
+
+        /* Landscape phones: reclaim the vertical space */
+        @media (max-height: 560px) and (orientation: landscape) {
+            .hero {
+                gap: 10px;
+                margin-bottom: 16px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .steps {
+                margin-top: 20px;
             }
         }
 
         .cancel-btn {
-            padding: 9px 20px;
+            padding: 11px 22px;
+            min-height: 44px;
             background: none;
             border: 1px solid color-mix(in srgb, var(--border-color) 50%, transparent);
             color: var(--text-secondary);
